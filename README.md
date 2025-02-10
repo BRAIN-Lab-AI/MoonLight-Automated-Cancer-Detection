@@ -1,4 +1,4 @@
-# MoonLight-Automated-Cancer-Detection
+# MoonLight: Automated Cancer Detection
 
 Below is a template for another sample project. Please follow this template.
 # [Deep Learning Project Template] Enhanced Stable Diffusion: A Deep Learning Approach for Artistic Image Generation
