@@ -45,11 +45,7 @@ This section explains key technical and domain-specific terms used in the Moonli
 - **Cross Entropy Loss:** Measures the performance of a classification model by penalizing incorrect predictions based on predicted probabilities.
 - **Focal Loss:** Addresses class imbalance by down-weighting well-classified examples, making the model focus on harder, minority-class samples.
 - **Perceptual Loss:** Computes the Mean Squared Error (MSE) between predicted softmax probabilities and one-hot encoded labels. Enhances perceptual similarity learning.
-- **Composite Loss:** Combines Cross Entropy and Perceptual Loss to improve both class discrimination and semantic alignment:
-  \[
-  \text{Loss}_{\text{composite}} = \alpha \cdot \text{Loss}_{\text{CE}} + \beta \cdot \text{Loss}_{\text{Perceptual}}
-  \]
-
+- **Composite Loss:** Combines Cross Entropy and Perceptual Loss to improve both class discrimination and semantic alignment.
 - **Basic Augmentation:** Includes resizing, normalization, and horizontal flipping. Helps improve generalization with minimal transformation overhead.
 - **Advanced Augmentation:** Includes random resized cropping, flipping, rotation, and color jittering. Enhances robustness by simulating real-world variability in histological slide appearance.
 - **Grad-CAM / Grad-CAM++:** Gradient-based visual explanation tools that highlight regions of an image most influential to the model's decision. Grad-CAM++ offers better localization and finer heatmaps.
