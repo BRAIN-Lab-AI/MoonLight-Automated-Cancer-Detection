@@ -14,17 +14,17 @@ Moonlight aims to support AI-assisted diagnostics with clinically relevant outco
 - **Affiliation:** King Fahd University of Petroleum and Minerals (KFUPM)
 
 ### Project Documents
-- 📊 **Presentation:** [Project Presentation](/presentation.pptx)
-- 📄 **Report:** [Moonlight Project Report](Moonlight__Enhanced_Deep_Learning_Models_for_Breast_Cancer_Detection_Using_Histopathology_Image.pdf)
+- **Presentation:** [Project Presentation](/presentation.pptx)
+- **Report:** [Moonlight Project Report](Moonlight__Enhanced_Deep_Learning_Models_for_Breast_Cancer_Detection_Using_Histopathology_Image.pdf)
 
 ### Reference Paper
-- 🔬 [Hybrid Deep Learning for Breast Cancer Histopathology](https://pmc.ncbi.nlm.nih.gov/articles/PMC11191493/)
+- [Hybrid Deep Learning for Breast Cancer Histopathology](https://pmc.ncbi.nlm.nih.gov/articles/PMC11191493/)
 
 ### Reference Dataset
-- 🧬 [BreaKHis Dataset on Kaggle](https://www.kaggle.com/datasets/ambarish/breakhis?resource=download)
+- [BreaKHis Dataset on Kaggle](https://www.kaggle.com/datasets/ambarish/breakhis?resource=download)
 
 ### Reference Code Repository
-- 💻 [GitHub Repo](https://github.com/mrdvince/breast_cancer_detection)
+- [GitHub Repo](https://github.com/mrdvince/breast_cancer_detection)
 
 
 ## Project Technicalities
@@ -33,7 +33,7 @@ Moonlight aims to support AI-assisted diagnostics with clinically relevant outco
 
 This section explains key technical and domain-specific terms used in the Moonlight project, spanning both deep learning concepts and histopathological breast cancer analysis.
 
-### 🧠 Deep Learning & Technical Terminologies
+### Deep Learning & Technical Terminologies
 
 - **SimpleCNN:** A basic convolutional neural network used as a baseline model. It contains three convolutional layers, adaptive pooling, and a fully connected classifier. It helps establish reference performance for evaluating enhanced models.
 - **ResidualModel:** A CNN architecture that introduces *residual connections* or skip links to allow gradients to flow directly through the network. This improves training stability, especially in deep architectures.
@@ -51,9 +51,7 @@ This section explains key technical and domain-specific terms used in the Moonli
 - **StepLR Scheduler:** Decreases the learning rate at regular intervals to promote stable convergence.
 - **Early Stopping:** Halts training if the validation loss does not improve after a specified number of epochs, preventing overfitting.
 
----
-
-### 🧬 Medical & Domain-Specific Terminologies
+### Medical & Domain-Specific Terminologies
 
 - **Breast Cancer:** A malignant tumor that originates from breast tissue. Early detection through image-based diagnostics significantly improves treatment outcomes.
 - **Histopathology:** The microscopic examination of tissue samples to identify signs of disease. In this project, histopathological slides of breast tissue are used for automated classification.
@@ -68,9 +66,16 @@ This section explains key technical and domain-specific terms used in the Moonli
 - **Pathologist:** A medical expert who interprets histological slides. Moonlight aims to support their diagnosis by offering AI-generated second opinions with visual evidence (heatmaps).
 
 ### Problem Statements
-- **Problem 1:** Achieving high-resolution and detailed images using conventional diffusion models remains challenging.
-- **Problem 2:** Existing models suffer from slow inference times during the image generation process.
-- **Problem 3:** There is limited capability in performing style transfer and generating diverse artistic variations.
+1. **Architectural Limitations:**  
+   Existing CNN models lack the depth and flexibility needed to capture the subtle tissue patterns and cellular variations in histopathological images, especially across different tumor subtypes and magnifications.
+2. **Loss Function Sensitivity and Class Imbalance:**  
+   Conventional loss functions such as Cross Entropy do not adequately reflect the domain-specific challenges in medical imaging, including class imbalance and the high cost of false negatives.
+3. **Insufficient Data Augmentation:**  
+   Basic image augmentations do not simulate the complex variability found in real-world histological slides, such as lighting inconsistencies, staining variations, or tissue deformation.
+4. **Lack of Interpretability:**  
+   Without model transparency, predictions made by deep learning models are difficult for pathologists to trust, limiting clinical adoption.
+5. **Grayscale Input and Color Loss:**  
+   Many existing models operate on grayscale images, discarding vital color-based diagnostic cues like nuclear staining intensity and cytoplasmic texture.
 
 ### Loopholes or Research Areas
 - **Evaluation Metrics:** Lack of robust metrics to effectively assess the quality of generated images.
