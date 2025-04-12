@@ -66,16 +66,11 @@ This section explains key technical and domain-specific terms used in the Moonli
 - **Pathologist:** A medical expert who interprets histological slides. Moonlight aims to support their diagnosis by offering AI-generated second opinions with visual evidence (heatmaps).
 
 ### Problem Statements
-1. **Architectural Limitations:**  
-   Existing CNN models lack the depth and flexibility needed to capture the subtle tissue patterns and cellular variations in histopathological images, especially across different tumor subtypes and magnifications.
-2. **Loss Function Sensitivity and Class Imbalance:**  
-   Conventional loss functions such as Cross Entropy do not adequately reflect the domain-specific challenges in medical imaging, including class imbalance and the high cost of false negatives.
-3. **Insufficient Data Augmentation:**  
-   Basic image augmentations do not simulate the complex variability found in real-world histological slides, such as lighting inconsistencies, staining variations, or tissue deformation.
-4. **Lack of Interpretability:**  
-   Without model transparency, predictions made by deep learning models are difficult for pathologists to trust, limiting clinical adoption.
-5. **Grayscale Input and Color Loss:**  
-   Many existing models operate on grayscale images, discarding vital color-based diagnostic cues like nuclear staining intensity and cytoplasmic texture.
+1. **Architectural Limitations:** Existing CNN models lack the depth and flexibility needed to capture the subtle tissue patterns and cellular variations in histopathological images, especially across different tumor subtypes and magnifications.
+2. **Loss Function Sensitivity and Class Imbalance:** Conventional loss functions such as Cross Entropy do not adequately reflect the domain-specific challenges in medical imaging, including class imbalance and the high cost of false negatives.
+3. **Insufficient Data Augmentation:** Basic image augmentations do not simulate the complex variability found in real-world histological slides, such as lighting inconsistencies, staining variations, or tissue deformation.
+4. **Lack of Interpretability:** Without model transparency, predictions made by deep learning models are difficult for pathologists to trust, limiting clinical adoption.
+5. **Grayscale Input and Color Loss:** Many existing models operate on grayscale images, discarding vital color-based diagnostic cues like nuclear staining intensity and cytoplasmic texture.
 
 ### Loopholes or Research Areas
 - **Evaluation Metrics:** Lack of robust metrics to effectively assess the quality of generated images.
