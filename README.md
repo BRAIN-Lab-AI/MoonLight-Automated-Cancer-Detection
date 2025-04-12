@@ -1,10 +1,10 @@
-# MoonLight: Automated Cancer Detection
-
-Below is a template for another sample project. Please follow this template.
-# [Deep Learning Project Template] Enhanced Stable Diffusion: A Deep Learning Approach for Artistic Image Generation
+# Moonlight: Enhanced Deep Learning Models for Breast Cancer Detection Using Histopathology Images
 
 ## Introduction
-Enhanced Stable Diffusion is a cutting-edge deep learning project that redefines artistic image generation by leveraging an advanced diffusion process to convert textual descriptions into high-quality images. By integrating a modified UNet architecture with innovative loss functions and enhanced data augmentation strategies, the model iteratively refines a latent noise vector conditioned on text embeddings to produce detailed and visually compelling artwork. This approach not only addresses common challenges such as slow inference times and output inconsistencies found in traditional diffusion models, but also pushes the boundaries of creative image synthesis, paving the way for novel applications in art, design, and multimedia content creation.
+
+**Moonlight** is an advanced deep learning framework designed to improve the accuracy, robustness, and interpretability of breast cancer diagnosis from histopathological images. The project introduces modular CNN architectures, novel loss functions, enhanced data augmentation strategies, and explainability features through Grad-CAM++. 
+
+Moonlight aims to support AI-assisted diagnostics with clinically relevant outcomes and provides researchers with a configurable pipeline for experimentation using the BreaKHis dataset.
 
 ## Project Metadata
 ### Authors
