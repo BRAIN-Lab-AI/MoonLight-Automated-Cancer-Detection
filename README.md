@@ -7,20 +7,24 @@
 Moonlight aims to support AI-assisted diagnostics with clinically relevant outcomes and provides researchers with a configurable pipeline for experimentation using the BreaKHis dataset.
 
 ## Project Metadata
+
 ### Authors
-- **Team:** Mohammad Ahmad, Umar Abdullah and Malik Hussain
-- **Supervisor Name:** Dr. Muzammil Behzad
-- **Affiliations:** SABIC, ARAMCO and KFUPM
+- **Author:** Hassan Jawad Al-Dahneen  
+- **Supervisor:** Dr. Muzammil Behzad  
+- **Affiliation:** King Fahd University of Petroleum and Minerals (KFUPM)
 
 ### Project Documents
-- **Presentation:** [Project Presentation](/presentation.pptx)
-- **Report:** [Project Report](/report.pdf)
+- 📊 **Presentation:** [Project Presentation](/presentation.pptx)
+- 📄 **Report:** [Moonlight Project Report](Moonlight__Enhanced_Deep_Learning_Models_for_Breast_Cancer_Detection_Using_Histopathology_Image.pdf)
 
 ### Reference Paper
-- [High-Resolution Image Synthesis with Latent Diffusion Models](https://arxiv.org/abs/2112.10752)
+- 🔬 [Hybrid Deep Learning for Breast Cancer Histopathology](https://pmc.ncbi.nlm.nih.gov/articles/PMC11191493/)
 
 ### Reference Dataset
-- [LAION-5B Dataset](https://laion.ai/blog/laion-5b/)
+- 🧬 [BreaKHis Dataset on Kaggle](https://www.kaggle.com/datasets/ambarish/breakhis?resource=download)
+
+### Reference Code Repository
+- 💻 [GitHub Repo](https://github.com/mrdvince/breast_cancer_detection)
 
 
 ## Project Technicalities
