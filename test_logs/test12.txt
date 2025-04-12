@@ -1,0 +1,9 @@
+
+===== Test Results =====
+Test Loss       : 0.2902
+Test Accuracy   : 86.61%
+Precision       : 0.8654
+Recall          : 0.8661
+F1 Score        : 0.8616
+========================
+
