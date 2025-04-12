@@ -33,11 +33,9 @@ Moonlight aims to support AI-assisted diagnostics with clinically relevant outco
 
 This section explains key technical and domain-specific terms used in the Moonlight project, spanning both deep learning concepts and histopathological breast cancer analysis.
 
----
-
 ### 🧠 Deep Learning & Technical Terminologies
 
-- **SimpleCNN (DefaultModel):** A basic convolutional neural network used as a baseline model. It contains three convolutional layers, adaptive pooling, and a fully connected classifier. It helps establish reference performance for evaluating enhanced models.
+- **SimpleCNN:** A basic convolutional neural network used as a baseline model. It contains three convolutional layers, adaptive pooling, and a fully connected classifier. It helps establish reference performance for evaluating enhanced models.
 - **ResidualModel:** A CNN architecture that introduces *residual connections* or skip links to allow gradients to flow directly through the network. This improves training stability, especially in deep architectures.
 - **EfficientConvModel:** A lightweight architecture that uses **depthwise separable convolutions** to reduce computational load while preserving accuracy. Inspired by MobileNet design principles.
 - **UNetClassifier:** A classifier variant of the U-Net architecture. Originally developed for biomedical segmentation, it combines downsampling and upsampling paths to retain spatial features — ideal for capturing microscopic patterns in histology.
