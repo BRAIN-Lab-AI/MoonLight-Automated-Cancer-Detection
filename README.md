@@ -29,17 +29,49 @@ Moonlight aims to support AI-assisted diagnostics with clinically relevant outco
 
 ## Project Technicalities
 
-### Terminologies
-- **Diffusion Model:** A generative model that progressively transforms random noise into coherent data.
-- **Latent Space:** A compressed, abstract representation of data where complex features are captured.
-- **UNet Architecture:** A neural network with an encoder-decoder structure featuring skip connections for better feature preservation.
-- **Text Encoder:** A model that converts text into numerical embeddings for downstream tasks.
-- **Perceptual Loss:** A loss function that measures high-level differences between images, emphasizing perceptual similarity.
-- **Tokenization:** The process of breaking down text into smaller units (tokens) for processing.
-- **Noise Vector:** A randomly generated vector used to initialize the diffusion process in generative models.
-- **Decoder:** A network component that transforms latent representations back into image space.
-- **Iterative Refinement:** The process of gradually improving the quality of generated data through multiple steps.
-- **Conditional Generation:** The process where outputs are generated based on auxiliary inputs, such as textual descriptions.
+## Terminologies
+
+This section explains key technical and domain-specific terms used in the Moonlight project, spanning both deep learning concepts and histopathological breast cancer analysis.
+
+---
+
+### 🧠 Deep Learning & Technical Terminologies
+
+- **SimpleCNN (DefaultModel):** A basic convolutional neural network used as a baseline model. It contains three convolutional layers, adaptive pooling, and a fully connected classifier. It helps establish reference performance for evaluating enhanced models.
+- **ResidualModel:** A CNN architecture that introduces *residual connections* or skip links to allow gradients to flow directly through the network. This improves training stability, especially in deep architectures.
+- **EfficientConvModel:** A lightweight architecture that uses **depthwise separable convolutions** to reduce computational load while preserving accuracy. Inspired by MobileNet design principles.
+- **UNetClassifier:** A classifier variant of the U-Net architecture. Originally developed for biomedical segmentation, it combines downsampling and upsampling paths to retain spatial features — ideal for capturing microscopic patterns in histology.
+- **DenseNet121:** A densely connected convolutional network where each layer receives feature maps from all preceding layers. Enhances feature reuse and gradient propagation.
+- **Cross Entropy Loss:** Measures the performance of a classification model by penalizing incorrect predictions based on predicted probabilities.
+- **Focal Loss:** Addresses class imbalance by down-weighting well-classified examples, making the model focus on harder, minority-class samples.
+- **Perceptual Loss:** Computes the Mean Squared Error (MSE) between predicted softmax probabilities and one-hot encoded labels. Enhances perceptual similarity learning.
+- **Composite Loss:** Combines Cross Entropy and Perceptual Loss to improve both class discrimination and semantic alignment:
+  \[
+  \text{Loss}_{\text{composite}} = \alpha \cdot \text{Loss}_{\text{CE}} + \beta \cdot \text{Loss}_{\text{Perceptual}}
+  \]
+
+- **Basic Augmentation:** Includes resizing, normalization, and horizontal flipping. Helps improve generalization with minimal transformation overhead.
+- **Advanced Augmentation:** Includes random resized cropping, flipping, rotation, and color jittering. Enhances robustness by simulating real-world variability in histological slide appearance.
+- **Grad-CAM / Grad-CAM++:** Gradient-based visual explanation tools that highlight regions of an image most influential to the model's decision. Grad-CAM++ offers better localization and finer heatmaps.
+- **AMP (Automatic Mixed Precision):** Speeds up training and reduces memory usage by mixing 16-bit and 32-bit floating-point calculations.
+- **StepLR Scheduler:** Decreases the learning rate at regular intervals to promote stable convergence.
+- **Early Stopping:** Halts training if the validation loss does not improve after a specified number of epochs, preventing overfitting.
+
+---
+
+### 🧬 Medical & Domain-Specific Terminologies
+
+- **Breast Cancer:** A malignant tumor that originates from breast tissue. Early detection through image-based diagnostics significantly improves treatment outcomes.
+- **Histopathology:** The microscopic examination of tissue samples to identify signs of disease. In this project, histopathological slides of breast tissue are used for automated classification.
+- **Benign Tumor:** A non-cancerous growth that does not invade nearby tissues or spread. Examples in the BreaKHis dataset include fibroadenomas and phyllodes tumors.
+- **Malignant Tumor:** A cancerous mass with invasive and metastatic potential. Includes types such as ductal carcinoma, lobular carcinoma, and papillary carcinoma in the BreaKHis dataset.
+- **Hyperchromatic Nuclei:** Dark-stained cell nuclei often found in malignant tissues due to increased DNA content — a critical visual marker for pathologists and deep learning models.
+- **Nucleus-to-Cytoplasm Ratio (N:C Ratio):** A higher N:C ratio is commonly observed in malignant cells. Deep learning models can implicitly learn such features during training.
+- **Tissue Architecture:** Describes the spatial organization of cells and structures in a tissue sample. Cancer often causes architectural distortion, which can be learned by U-Net and residual architectures.
+- **BreaKHis Dataset:** A histopathological image dataset containing 7,909 annotated images of benign and malignant breast tissue at multiple magnifications (40X, 100X, 200X, 400X).
+- **Magnification (400X):** Refers to the level of image zoom. The Moonlight project primarily works at the 400X magnification level to capture high-resolution cellular features.
+- **H&E Stain (Hematoxylin & Eosin):** Common staining method used in histology. Hematoxylin stains nuclei blue; eosin stains the cytoplasm pink. The RGB format preserves these color cues, which are critical for accurate classification.
+- **Pathologist:** A medical expert who interprets histological slides. Moonlight aims to support their diagnosis by offering AI-generated second opinions with visual evidence (heatmaps).
 
 ### Problem Statements
 - **Problem 1:** Achieving high-resolution and detailed images using conventional diffusion models remains challenging.
