@@ -232,7 +232,7 @@ Follow these steps to set up, train, evaluate, and visualize breast cancer detec
 **Step 1: Clone the Repository**
 
 ```bash
-git clone https://github.com/yourusername/moonlight-breast-cancer-detection.git
+git clone https://github.com/BRAIN-Lab-AI/MoonLight-Automated-Cancer-Detection.git
 cd moonlight-breast-cancer-detection
 ```
 
@@ -267,15 +267,10 @@ data/BreaKHis_v1/BreaKHis_v1/histology_slides/breast/
 
 **Step 4: Train a Model**
 
-Use the default configuration file or override parameters from the command line:
+Use the default configuration file or override parameters from the command line. Run the below to get the best performing model out of the 15 which we tried:
 
 ```bash
-python train.py -c config.json \
-  --model_arch unet \
-  --loss_fn composite \
-  --augment advanced \
-  --bs 32 \
-  --lr 0.0005
+python train.py -c config.json --model_arch unet_classifier --loss_fn cross_entropy --augment basic --save_name model10 > logs\model10.txt
 ```
 
 **Step 5: Test a Trained Model**
