@@ -219,80 +219,38 @@ All components below are organized into reusable Python modules. Files marked wi
 
 ## Model Workflow
 
-The Moonlight framework follows a modular, end-to-end workflow for classifying histopathological breast tissue images into benign or malignant categories, with support for model flexibility and visual interpretability.
+The Moonlight framework processes histopathology images through a structured pipeline that includes image preparation, model training, performance evaluation, and visual explanation.
 
 ---
 
 ### 1. **Input**
 
-- **Histopathology Slide (RGB):** H&E-stained biopsy image at 400X magnification.
-- **Color Retention:** Full RGB color is used to preserve nuclear, cytoplasmic, and tissue morphology features.
-- **Preprocessing:** Images are resized to 224×224 pixels and normalized using ImageNet statistics.
+The workflow begins with a microscopic image of breast tissue. These images are color-preserved (RGB) and typically show cellular structures at high magnification. They are prepared and standardized to ensure consistency for model input.
 
 ---
 
 ### 2. **Processing and Training**
 
-- **Augmentation Options:**
-  - `basic`: Resize + Normalize
-  - `advanced`: Random cropping, flipping, rotation, color jittering (simulates real-world slide variability)
+Each input image is enhanced using a set of preprocessing steps that may include resizing, flipping, rotating, and color adjustments. These augmentations help the model generalize better by simulating real-world variations in histopathology slides.
 
-- **Model Selection (`--model_arch`):**
-  - Options include: `densenet121`, `residual`, `unet`, `efficient`, `simplecnn`
-
-- **Loss Function (`--loss_fn`):**
-  - Options include: `cross_entropy`, `focal`, `perceptual`, `composite` (CE + Perceptual)
-
-- **Training Configuration:**
-  - Optimizer: Adam with AMSGrad
-  - Scheduler: StepLR
-  - Early stopping enabled for efficiency and generalization
-  - CLI options allow overriding batch size (`--bs`), learning rate (`--lr`), and augmentation type (`--augment`)
-
-- **Training Output:**
-  - Best model saved as:  
-    ```
-    model_best.pth
-    ```
-  - Checkpoints saved at each epoch in the experiment directory
+Once the images are processed, they are fed into a deep learning model. The model is trained to distinguish between benign and malignant tissue patterns. During training, the system monitors how well the model performs on validation samples and automatically saves the best version of the model for later testing.
 
 ---
 
 ### 3. **Testing and Evaluation**
 
-- Evaluate the best model using:
-  ```bash
-  python test.py -c config.json -r path/to/model_best.pth
-  ```
-
-- **Metrics Reported:**
-  - Accuracy
-  - Precision
-  - Recall
-  - F1-Score
-
-- These metrics provide a comprehensive view of classification performance, especially in class-imbalanced scenarios.
+After training, the saved model is tested on previously unseen images. The system generates a full performance report that includes accuracy, precision, recall, and F1-score. These metrics help assess how reliable and effective the model is at detecting cancer.
 
 ---
 
-### 4. **Grad-CAM++ Visual Explanation**
+### 4. **Visual Explanation**
 
-- Grad-CAM and Grad-CAM++ are applied to one benign and one malignant test image.
-- The output includes:
-  - Original image
-  - Grad-CAM overlay
-  - Grad-CAM++ overlay
-  - Prediction label and confidence
-
-- **Saved Visualizations:**
-  ```
-  cam_benign.png
-  cam_malignant.png
-  ```
+To make the model’s decisions understandable, a visual explanation technique called Grad-CAM++ is used. It highlights the areas in the tissue image that the model focused on when making its prediction. This helps build trust and offers insights for clinical review.
 
 ---
 
-This workflow enables a complete pipeline from raw histological image input to explainable, benchmarked classification performance.
+This structured workflow ensures the model is trained effectively, evaluated thoroughly, and made explainable for medical professionals.
+
 
 ## How to Run the Code
 
