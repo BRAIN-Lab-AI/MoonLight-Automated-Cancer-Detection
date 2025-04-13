@@ -67,21 +67,29 @@ This section explains key technical and domain-specific terms used in the Moonli
 
 ### Problem Statements
 1. **Domain Misalignment of Pretrained Architectures:** Pretrained CNNs like DenseNet121 are deep and powerful, but they were originally designed for natural image datasets (e.g., ImageNet). As such, they may not be optimally structured to capture domain-specific features in histopathological images — such as nuclear morphology, tissue architecture, and staining patterns — without significant fine-tuning or architectural adaptation.
-2. **Loss Function Sensitivity and Class Imbalance:** Conventional loss functions such as Cross Entropy do not adequately reflect the domain-specific challenges in medical imaging, including class imbalance and the high cost of false negatives.
-3. **Insufficient Data Augmentation:** Basic image augmentations do not simulate the complex variability found in real-world histological slides, such as lighting inconsistencies, staining variations, or tissue deformation.
-4. **Lack of Interpretability:** Without model transparency, predictions made by deep learning models are difficult for pathologists to trust, limiting clinical adoption.
-5. **Grayscale Input and Color Loss:** Many existing models operate on grayscale images, discarding vital color-based diagnostic cues like nuclear staining intensity and cytoplasmic texture.
+2. **Insufficient Data Augmentation:** Basic image augmentations do not simulate the complex variability found in real-world histological slides, such as lighting inconsistencies, staining variations, or tissue deformation.
+3. **Lack of Interpretability:** Without model transparency, predictions made by deep learning models are difficult for pathologists to trust, limiting clinical adoption.
+4. **Grayscale Input and Color Loss:** Many existing models operate on grayscale images, discarding vital color-based diagnostic cues like nuclear staining intensity and cytoplasmic texture.
 
 
 ### Loopholes or Research Areas
-- **Evaluation Metrics:** Lack of robust metrics to effectively assess the quality of generated images.
-- **Output Consistency:** Inconsistencies in output quality when scaling the model to higher resolutions.
-- **Computational Resources:** Training requires significant GPU compute resources, which may not be readily accessible.
+- Over-reliance on one architecture (e.g., DenseNet121) without exploring efficiency vs. performance tradeoffs in custom-designed models.
+- Absence of hybrid loss functions that combine class-wise accuracy and semantic alignment.
+- Limited data augmentation beyond basic flipping or resizing.
+- Few pipelines offer clinical interpretability via explainable AI tools.
+- Lack of modular, reusable deep learning frameworks for histopathology analysis.
 
 ### Problem vs. Ideation: Proposed 3 Ideas to Solve the Problems
 1. **Optimized Architecture:** Redesign the model architecture to improve efficiency and balance image quality with faster inference.
 2. **Advanced Loss Functions:** Integrate novel loss functions (e.g., perceptual loss) to better capture artistic nuances and structural details.
 3. **Enhanced Data Augmentation:** Implement sophisticated data augmentation strategies to improve the model’s robustness and reduce overfitting.
+
+| Problem | Proposed Solution |
+|--------|--------------------|
+| 🧱 **Model Inflexibility & Domain Misalignment** | ✅ **Optimized Architecture**<br>Introduce and benchmark modular CNNs (e.g., ResidualModel, EfficientConvModel, UNetClassifier) that are tailored for histopathological feature extraction. |
+| 🧬 **Overfitting & Poor Generalization** | ✅ **Enhanced Data Augmentation**<br>Apply advanced augmentations (cropping, rotation, jittering) to reflect clinical variability and improve robustness. |
+| 🌈 **Color Information Loss in Grayscale Input** | ✅ **RGB Image Utilization**<br>Train models using RGB histopathological images to retain critical color-based features like nuclear chromasia, eosinophilic cytoplasm, and staining gradients. |
+| 🔍 **Lack of Model Interpretability** | ✅ **Explainable AI Integration**<br>Incorporate Grad-CAM and Grad-CAM++ to highlight discriminative regions, improving transparency and clinical trust in model decisions. |
 
 ### Proposed Solution: Code-Based Implementation
 This repository provides an implementation of the enhanced stable diffusion model using PyTorch. The solution includes:
