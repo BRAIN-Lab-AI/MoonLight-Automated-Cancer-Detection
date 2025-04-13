@@ -140,7 +140,7 @@ Each of the above ideas has been implemented and evaluated through modular confi
   - A central `config.json` file
   - Or overridden dynamically through the command line using flags
 
-  #### 📦 Configurable Components
+  #### Configurable Components
 
   | Component        | CLI Flag              | Available Options                                  |
   |------------------|------------------------|----------------------------------------------------|
@@ -150,7 +150,7 @@ Each of the above ideas has been implemented and evaluated through modular confi
   | Batch Size         | `--bs`               | e.g., `16`, `32`, `64`                             |
   | Learning Rate      | `--lr`               | e.g., `0.001`, `0.0001`                            |
 
-  #### 🧪 Example: Run a custom training experiment
+  #### Example: Run a custom training experiment
   ```bash
   python train.py -c config.json --model_arch unet --loss_fn composite --augment advanced  --bs 32 --lr 0.0005
 
