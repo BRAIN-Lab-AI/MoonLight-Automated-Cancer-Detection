@@ -305,7 +305,8 @@ This will generate output images with:
 - Prediction label and confidence displayed at the top
 
 The results should look like this:
-
+![Infrance done on benign sample](images/exp10_cam_benign.png)
+![Infrance done on malignant sample](images/exp10_cam_malignant.png)
 
 **Optional: Customize Experiments via CLI**
 
