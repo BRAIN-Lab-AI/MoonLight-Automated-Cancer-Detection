@@ -154,7 +154,7 @@ Each of the above ideas has been implemented and evaluated through modular confi
   ```bash
   python train.py -c config.json --model_arch unet --loss_fn composite --augment advanced  --bs 32 --lr 0.0005
 
-These innovations collectively aim to improve prediction accuracy, interpretability, and trust in deep learning-based breast cancer diagnosis tools.
+These innovations collectively aim to improve prediction accuracy, interpretability, and trust in deep learning-based breast cancer diagnosis tools. In addation, this approach supports reproducible experimentation across architectures, losses, and preprocessing strategies without modifying any core code.
 
 ### Key Components
 - **`model.py`**: Contains the modified UNet architecture and other model components.
