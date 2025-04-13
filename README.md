@@ -157,10 +157,85 @@ Each of the above ideas has been implemented and evaluated through modular confi
 These innovations collectively aim to improve prediction accuracy, interpretability, and trust in deep learning-based breast cancer diagnosis tools. In addation, this approach supports reproducible experimentation across architectures, losses, and preprocessing strategies without modifying any core code.
 
 ### Key Components
-- **`model.py`**: Contains the modified UNet architecture and other model components.
-- **`train.py`**: Script to handle the training process with configurable parameters.
-- **`utils.py`**: Utility functions for data processing, augmentation, and metric evaluations.
-- **`inference.py`**: Script for generating images using the trained model.
+## Key Components
+
+The Moonlight framework builds on top of the original BreaKHis deep learning pipeline by introducing several **enhanced** and **new** modules that improve flexibility, performance, and explainability.
+
+All components below are organized into reusable Python modules. Files marked with:
+
+- 🔄 **Improved** → updated to support modular experimentation and new features  
+- 🆕 **New** → created from scratch to extend the original baseline functionality
+
+---
+
+### Model Architectures (`model/`)
+
+| File | Type | Description |
+|------|------|-------------|
+| `SimpleCNN.py` | New | Added adaptive pooling and consistent flattening for plug-and-play compatibility |
+| `residual_model.py` | New | Residual block model with batch normalization, used in multiple experiments for better gradient flow |
+| `efficient_model.py` | New | Efficient CNN using depthwise separable convolutions to reduce parameters while maintaining accuracy |
+| `unet_classifier.py` | New | Custom U-Net-based classifier for spatially aware histological feature extraction, includes a residual block in the bottleneck |
+| `model.py` | Improved | Unified entry point that loads all architectures via config. Supports `densenet121`, `residual`, `efficient`, `unet`, `simplecnn` |
+
+---
+
+### Loss Functions (`model/loss_functions.py`)
+
+| File | Type | Description |
+|------|------|-------------|
+| `loss_functions.py` | New | Custom loss implementations:<br>- `FocalLoss`: addresses class imbalance<br>- `PerceptualLoss`: semantic alignment using softmax MSE<br>- `CompositeLoss`: hybrid of CrossEntropy + Perceptual<br>- Dispatcher via `get_loss_function(name)` |
+
+---
+
+### Data Loading (`data_loader/`)
+
+| File | Type | Description |
+|------|------|-------------|
+| `base_data_loader.py` | Improved | Now supports `pin_memory` and deterministic stratified validation splits |
+| `data_loaders.py` | Improved | Introduced two augmentation strategies:<br>- `basic`: resize, normalize<br>- `advanced`: crop, flip, rotate, jitter. Selectable via config CLI flag |
+
+---
+
+### Configuration and Pipeline
+
+| File | Type | Description |
+|------|------|-------------|
+| `config.json` | Improved | Template config with model, loss, augmentation, optimizer, AMP, and training settings |
+| `train.py` | Improved | Fully modular training script with CLI overrides (`--model_arch`, `--loss_fn`, etc.) |
+| `test.py` | Improved | Prints Accuracy, Precision, Recall, F1-Score on test set |
+
+---
+
+### 🎯 Interpretability
+
+| File | Type | Description |
+|------|------|-------------|
+| `generate_gradcam_pp.py` | New | Implements manual Grad-CAM and Grad-CAM++ from scratch. Visualizes predictions for fixed benign & malignant samples with heatmap overlays and confidence bars |
+
+---
+
+### 🧰 Utilities
+
+| File | Type | Description |
+|------|------|-------------|
+| `parse_config.py` | Improved | Extended to support CLI overrides of nested JSON parameters |
+| `utils.py` | Stable | Contains helper functions (logger, tensor conversion, metrics, etc.) |
+
+---
+
+### 🧪 Summary of Enhancements
+
+| Component Area | Enhancement Summary |
+|----------------|---------------------|
+| **Model** | Added residual, efficient, and U-Net classifiers with plug-and-play architecture loader |
+| **Loss** | Introduced Focal, Perceptual, and Composite loss with modular config |
+| **Data** | Advanced augmentation option to simulate clinical variability |
+| **Training** | Configurable via CLI, supports AMP, early stopping, learning rate scheduling |
+| **Testing** | Extended to compute and display full performance metrics |
+| **Interpretability** | Manual Grad-CAM++ and Grad-CAM implemented for XAI support |
+| **Config** | Reproducible experiment design using structured JSON + CLI control |
+
 
 ## Model Workflow
 The workflow of the Enhanced Stable Diffusion model is designed to translate textual descriptions into high-quality artistic images through a multi-step diffusion process:
