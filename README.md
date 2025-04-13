@@ -166,7 +166,7 @@ All components below are organized into reusable Python modules. Files marked wi
 - **Improved** → updated to support modular experimentation and new features  
 - **New** → created from scratch to extend the original baseline functionality
 
-### Model Architectures (`model/`)
+**Model Architectures (`model/`)**
 
 | File | Type | Description |
 |------|------|-------------|
@@ -176,20 +176,20 @@ All components below are organized into reusable Python modules. Files marked wi
 | `unet_classifier.py` | New | Custom U-Net-based classifier for spatially aware histological feature extraction, includes a residual block in the bottleneck |
 | `model.py` | Improved | Unified entry point that loads all architectures via config. Supports `densenet121`, `residual`, `efficient`, `unet`, `simplecnn` |
 
-### Loss Functions (`model/loss_functions.py`)
+**Loss Functions (`model/loss_functions.py`)**
 
 | File | Type | Description |
 |------|------|-------------|
 | `loss_functions.py` | New | Custom loss implementations:<br>- `cross_entropy`: standard PyTorch `nn.CrossEntropyLoss()`<br>- `FocalLoss`: A dynamically scaled version of Cross Entropy Loss<br>- `CompositeLoss`: hybrid of CrossEntropy + Perceptual<br>- Dispatcher via `get_loss_function(name)` |
 
-### Data Loading (`data_loader/`)
+**Data Loading (`data_loader/`)**
 
 | File | Type | Description |
 |------|------|-------------|
 | `base_data_loader.py` | Improved | Now supports `pin_memory` and deterministic stratified validation splits |
 | `data_loaders.py` | Improved | Introduced two augmentation strategies:<br>- `basic`: resize, normalize<br>- `advanced`: crop, flip, rotate, jitter. Selectable via config CLI flag |
 
-### Configuration and Pipeline
+**Configuration and Pipeline**
 
 | File | Type | Description |
 |------|------|-------------|
@@ -197,20 +197,20 @@ All components below are organized into reusable Python modules. Files marked wi
 | `train.py` | Improved | Fully modular training script with CLI overrides (`--model_arch`, `--loss_fn`, etc.) |
 | `test.py` | Improved | Prints Accuracy, Precision, Recall, F1-Score on test set |
 
-### Interpretability
+**Interpretability**
 
 | File | Type | Description |
 |------|------|-------------|
 | `generate_gradcam_pp.py` | New | Implements manual Grad-CAM and Grad-CAM++ from scratch. Visualizes predictions for fixed benign & malignant samples with heatmap overlays and confidence bars |
 
-### Utilities
+**Utilities**
 
 | File | Type | Description |
 |------|------|-------------|
 | `parse_config.py` | Improved | Extended to support CLI overrides of nested JSON parameters |
 | `utils.py` | Stable | Contains helper functions (logger, tensor conversion, metrics, etc.) |
 
-### Summary of Enhancements
+**Summary of Enhancements**
 
 | Component Area | Enhancement Summary |
 |----------------|---------------------|
