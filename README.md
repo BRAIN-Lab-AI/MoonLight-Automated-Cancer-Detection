@@ -270,7 +270,7 @@ data/BreaKHis_v1/BreaKHis_v1/histology_slides/breast/
 Use the default configuration file or override parameters from the command line. Run the below to get the best performing model out of the 15 which we tried:
 
 ```bash
-python train.py -c config.json --model_arch unet_classifier --loss_fn cross_entropy --augment basic --save_name model10 > train_logs\model10.txt
+python train.py -c config.json --model_arch unet_classifier --loss_fn cross_entropy --augment basic --save_name model10
 ```
 
 **Step 5: Test a Trained Model**
