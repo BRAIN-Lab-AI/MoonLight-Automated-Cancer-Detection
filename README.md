@@ -240,31 +240,103 @@ The workflow of the Enhanced Stable Diffusion model is designed to translate tex
 
 ## How to Run the Code
 
-1. **Clone the Repository:**
-    ```bash
-    git clone https://github.com/yourusername/enhanced-stable-diffusion.git
-    cd enhanced-stable-diffusion
-    ```
+Follow these steps to set up, train, evaluate, and visualize breast cancer detection models using the Moonlight framework.
 
-2. **Set Up the Environment:**
-    Create a virtual environment and install the required dependencies.
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows use: venv\Scripts\activate
-    pip install -r requirements.txt
-    ```
+**Step 1: Clone the Repository**
 
-3. **Train the Model:**
-    Configure the training parameters in the provided configuration file and run:
-    ```bash
-    python train.py --config configs/train_config.yaml
-    ```
+```bash
+git clone https://github.com/yourusername/moonlight-breast-cancer-detection.git
+cd moonlight-breast-cancer-detection
+```
 
-4. **Generate Images:**
-    Once training is complete, use the inference script to generate images.
-    ```bash
-    python inference.py --checkpoint path/to/checkpoint.pt --input "A surreal landscape with mountains and rivers"
-    ```
+**Step 2: Set Up the Environment (Dependencies)**
+
+Create a Python virtual environment and install the required packages.
+
+```bash
+python3 -m venv venv
+source venv/bin/activate        # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**Step 3: Download and Prepare the Dataset**
+
+1. Download the BreaKHis dataset from Kaggle:  
+   https://www.kaggle.com/datasets/ambarish/breakhis?resource=download
+
+2. Place the downloaded file `breakhis.zip` into the root directory of this project.
+
+3. Unzip the dataset into the correct structure using the following command:
+
+```bash
+unzip breakhis.zip -d ./data/
+```
+
+After extraction, your directory structure should look like:
+
+```
+data/BreaKHis_v1/BreaKHis_v1/histology_slides/breast/
+```
+
+**Step 4: Train a Model**
+
+Use the default configuration file or override parameters from the command line:
+
+```bash
+python train.py -c config.json \
+  --model_arch unet \
+  --loss_fn composite \
+  --augment advanced \
+  --bs 32 \
+  --lr 0.0005
+```
+
+---
+
+**Step 5: Test a Trained Model**
+
+To evaluate a trained model using the best saved checkpoint:
+
+```bash
+python test.py -c config.json \
+  -r saved/models/BCUnet/exp10/model_best.pth
+```
+
+---
+
+**Step 6: Generate Grad-CAM++ Visualizations**
+
+Run Grad-CAM and Grad-CAM++ on one benign and one malignant image:
+
+```bash
+python generate_gradcam_pp.py -c config.json \
+  -r saved/models/BCUnet/exp10/model_best.pth
+```
+
+This will generate output images with:
+- Original image
+- Grad-CAM heatmap
+- Grad-CAM++ heatmap
+- Prediction label and confidence displayed at the top
+
+Output files will be saved to the same experiment directory.
+
+---
+
+**Optional: Customize Experiments via CLI**
+
+Moonlight supports CLI overrides for flexible experimentation:
+
+| Parameter         | Example Usage              |
+|------------------|----------------------------|
+| Model Architecture | `--model_arch unet`       |
+| Loss Function      | `--loss_fn composite`     |
+| Augmentation       | `--augment advanced`      |
+| Batch Size         | `--bs 64`                 |
+| Learning Rate      | `--lr 0.0001`             |
+
+You can also automate multiple runs using `.sh` or `.bat` scripts.
+
 
 ## Acknowledgments
 - **Open-Source Communities:** Thanks to the contributors of PyTorch, Hugging Face, and other libraries for their amazing work.
