@@ -150,10 +150,6 @@ Each of the above ideas has been implemented and evaluated through modular confi
   | Batch Size         | `--bs`               | e.g., `16`, `32`, `64`                             |
   | Learning Rate      | `--lr`               | e.g., `0.001`, `0.0001`                            |
 
-  #### Example: Run a custom training experiment
-  ```bash
-  python train.py -c config.json --model_arch unet --loss_fn composite --augment advanced  --bs 32 --lr 0.0005
-
 These innovations collectively aim to improve prediction accuracy, interpretability, and trust in deep learning-based breast cancer diagnosis tools. In addation, this approach supports reproducible experimentation across architectures, losses, and preprocessing strategies without modifying any core code.
 
 ## Key Components
@@ -223,92 +219,80 @@ All components below are organized into reusable Python modules. Files marked wi
 
 ## Model Workflow
 
-The Moonlight framework follows a modular, end-to-end workflow for classifying histopathological images into benign or malignant classes. The pipeline is designed for reproducibility, modular experimentation, and clinical interpretability.
+The Moonlight framework follows a modular, end-to-end workflow for classifying histopathological breast tissue images into benign or malignant categories, with support for model flexibility and visual interpretability.
+
+---
 
 ### 1. **Input**
 
-- **Histopathology Image:** The model receives an RGB H&E-stained microscopic image (typically 400X magnification).
-- **Color Preservation:** RGB format is retained to preserve diagnostic features such as nuclear staining, glandular structure, and cytoplasmic texture.
-- **Resize and Normalize:** All input images are resized to 224×224 pixels and normalized using ImageNet statistics.
+- **Histopathology Slide (RGB):** H&E-stained biopsy image at 400X magnification.
+- **Color Retention:** Full RGB color is used to preserve nuclear, cytoplasmic, and tissue morphology features.
+- **Preprocessing:** Images are resized to 224×224 pixels and normalized using ImageNet statistics.
 
 ---
 
-### 2. **Preprocessing and Augmentation**
+### 2. **Processing and Training**
 
-- **Basic Augmentation:**  
-  - Resize  
-  - Normalize  
+- **Augmentation Options:**
+  - `basic`: Resize + Normalize
+  - `advanced`: Random cropping, flipping, rotation, color jittering (simulates real-world slide variability)
 
-- **Advanced Augmentation (configurable via `--augment`):**  
-  - `RandomResizedCrop(224)`  
-  - `RandomHorizontalFlip(p=0.5)`  
-  - `RandomRotation(degrees=15)`  
-  - `ColorJitter(brightness, contrast, saturation)`
+- **Model Selection (`--model_arch`):**
+  - Options include: `densenet121`, `residual`, `unet`, `efficient`, `simplecnn`
 
----
-
-### 3. **Model Selection and Training**
-
-- **Selectable Architectures (`--model_arch`):**
-  - `densenet121`, `residual`, `unet`, `efficient`, `simplecnn`
-
-- **Configurable Loss Functions (`--loss_fn`):**
-  - `cross_entropy`
-  - `focal`
-  - `perceptual`
-  - `composite` (CE + Perceptual hybrid)
+- **Loss Function (`--loss_fn`):**
+  - Options include: `cross_entropy`, `focal`, `perceptual`, `composite` (CE + Perceptual)
 
 - **Training Configuration:**
-  - Optimizer: `Adam` with `AMSGrad`
-  - Scheduler: `StepLR`
-  - Early stopping enabled
-  - Batch size, learning rate, and augmentations configurable via CLI
+  - Optimizer: Adam with AMSGrad
+  - Scheduler: StepLR
+  - Early stopping enabled for efficiency and generalization
+  - CLI options allow overriding batch size (`--bs`), learning rate (`--lr`), and augmentation type (`--augment`)
 
-- **Output of Training:**
-  - Models are saved at each epoch (`checkpoint-epochX.pth`)
-  - The best model (based on validation loss) is saved as:
+- **Training Output:**
+  - Best model saved as:  
     ```
     model_best.pth
     ```
+  - Checkpoints saved at each epoch in the experiment directory
 
 ---
 
-### 4. **Testing and Evaluation**
+### 3. **Testing and Evaluation**
 
-- After training, the `model_best.pth` checkpoint is evaluated using:
+- Evaluate the best model using:
   ```bash
   python test.py -c config.json -r path/to/model_best.pth
   ```
 
-- **Generated Metrics:**
-  - **Accuracy:** Overall correctness of predictions
-  - **Precision:** TP / (TP + FP) — relevance of positive predictions
-  - **Recall:** TP / (TP + FN) — ability to identify all positives
-  - **F1-Score:** Harmonic mean of precision and recall
-  - All results are printed and logged per experiment
+- **Metrics Reported:**
+  - Accuracy
+  - Precision
+  - Recall
+  - F1-Score
+
+- These metrics provide a comprehensive view of classification performance, especially in class-imbalanced scenarios.
 
 ---
 
-### 5. **Grad-CAM++ Visual Explanation**
+### 4. **Grad-CAM++ Visual Explanation**
 
-- **Grad-CAM & Grad-CAM++** are applied to two selected test images (benign and malignant).
-- Visualizations include:
-  - Original input image
+- Grad-CAM and Grad-CAM++ are applied to one benign and one malignant test image.
+- The output includes:
+  - Original image
   - Grad-CAM overlay
   - Grad-CAM++ overlay
-  - Predicted label with softmax confidence
+  - Prediction label and confidence
 
-- **Outputs:**
-  - Saved as annotated `.png` files within the experiment folder:
-    ```
-    cam_benign.png
-    cam_malignant.png
-    ```
+- **Saved Visualizations:**
+  ```
+  cam_benign.png
+  cam_malignant.png
+  ```
 
 ---
 
-This workflow enables training, saving, evaluation, and interpretation of deep learning models tailored for histopathological breast cancer diagnosis using the BreaKHis dataset.
-
+This workflow enables a complete pipeline from raw histological image input to explainable, benchmarked classification performance.
 
 ## How to Run the Code
 
