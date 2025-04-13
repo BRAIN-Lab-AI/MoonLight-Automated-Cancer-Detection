@@ -274,7 +274,7 @@ python train.py -c config.json --model_arch unet_classifier --loss_fn composite 
 
 **Step 5: Test a Trained Model**
 
-To evaluate a trained model using the best saved checkpoint, update the subfolder name `PathTo` below to point to the right trained model then run.
+To evaluate a trained model using the best saved checkpoint, update subfolder named `PathTo` below to point to the right trained model then run.
 
 ```bash
 python -u test.py -c saved/models/Trained_Models/PathTo/config.json -r saved/models/Trained_Models/`PathTo`/model_best.pth
@@ -292,7 +292,7 @@ F1 Score        : 0.9454
 ```
 **Step 6: Inference & Generate Grad-CAM++ Visualizations**
 
-Run the inference which will use Grad-CAM and Grad-CAM++ to visualizes predictions for a sample benign or malignant image. Update the subfolders name `PathTo` below to point to the right trained model then run and `PathToImage` to point to the right smaple image.
+Run the inference which will use Grad-CAM and Grad-CAM++ to visualizes predictions for a sample (benign or malignant) image. Update subfolders named `PathTo` to point to the right trained model, and update subfolders named `PathToImage` to point to the right smaple image.
 
 ```bash
 python inference_visualize_cam_interactive.py -i PathToImage/SampleImage.png -c saved/models/Trained_Models/0413_121022/config.json -r saved/models/Trained_Models/0413_121022/model_best.pth
@@ -304,7 +304,8 @@ This will generate output images with:
 - Grad-CAM++ heatmap
 - Prediction label and confidence displayed at the top
 
-Output files will be saved to the same experiment directory.
+The results should look like this:
+
 
 **Optional: Customize Experiments via CLI**
 
