@@ -322,6 +322,13 @@ You can also automate multiple runs using `.sh` or `.bat` scripts.
 
 
 ## Acknowledgments
-- **Open-Source Communities:** Thanks to the contributors of PyTorch, Hugging Face, and other libraries for their amazing work.
-- **Individuals:** Special thanks to bla, bla, bla for the amazing team effort, invaluable guidance and support throughout this project.
-- **Resource Providers:** Gratitude to ABC-organization for providing the computational resources necessary for this project.
+- **Academic Guidance:**  
+  Special thanks to **Dr. Muzammil Behzad** for his continuous guidance, mentorship, and insightful feedback throughout the development of this project under the Master's in Artificial Intelligence program at KFUPM.
+
+- **Open-Source Communities:**  
+  Grateful to the developers and contributors of open-source libraries such as PyTorch, TorchVision, scikit-learn, and Matplotlib — without whom this project would not be possible.
+
+- **Dataset Contributors:**  
+  Appreciation to the creators of the **BreaKHis dataset** and the authors of the reference research paper for making their work publicly available to the research community.
+
+
