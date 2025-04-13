@@ -267,7 +267,7 @@ data/BreaKHis_v1/BreaKHis_v1/histology_slides/breast/
 
 **Step 4: Train a Model**
 
-Use the default configuration file or override parameters from the command line. Run the below to get the 2 best performing models out of the 15 which we tried:
+Run the below to get the 2 best performing models out of the 16 we tried.
 
 ```bash
 python train.py -c config.json --model_arch unet_classifier --loss_fn cross_entropy --augment basic
