@@ -277,9 +277,7 @@ python train.py -c config.json --model_arch unet_classifier --loss_fn composite 
 To evaluate a trained model using the best saved checkpoint:
 
 ```bash
-python test.py -c path/to/config.json \
-  -r saved/models/Trained Models/path_to/model_best.pth
-python -u test.py -c saved/models/path_to/config.json -r saved/models/path_to/model_best.pth
+python -u test.py -c saved/models/Trained_Models/`PathTo`/config.json -r saved/models/Trained_Models/`PathTo`/model_best.pth
 ```
 
 **Step 6: Generate Grad-CAM++ Visualizations**
