@@ -86,17 +86,58 @@ This section explains key technical and domain-specific terms used in the Moonli
 
 | Problem | Proposed Solution |
 |--------|--------------------|
-| 🧱 **Model Inflexibility & Domain Misalignment** | ✅ **Optimized Architecture**<br>Introduce and benchmark modular CNNs (e.g., ResidualModel, EfficientConvModel, UNetClassifier) that are tailored for histopathological feature extraction. |
-| 🧬 **Overfitting & Poor Generalization** | ✅ **Enhanced Data Augmentation**<br>Apply advanced augmentations (cropping, rotation, jittering) to reflect clinical variability and improve robustness. |
-| 🌈 **Color Information Loss in Grayscale Input** | ✅ **RGB Image Utilization**<br>Train models using RGB histopathological images to retain critical color-based features like nuclear chromasia, eosinophilic cytoplasm, and staining gradients. |
-| 🔍 **Lack of Model Interpretability** | ✅ **Explainable AI Integration**<br>Incorporate Grad-CAM and Grad-CAM++ to highlight discriminative regions, improving transparency and clinical trust in model decisions. |
+| **Model Inflexibility & Domain Misalignment** | **Optimized Architecture**<br>Introduce and benchmark modular CNNs (e.g., ResidualModel, EfficientConvModel, UNetClassifier) that are tailored for histopathological feature extraction. |
+| **Overfitting & Poor Generalization** | **Enhanced Data Augmentation**<br>Apply advanced augmentations (cropping, rotation, jittering) to reflect clinical variability and improve robustness. |
+| **Color Information Loss in Grayscale Input** | **RGB Image Utilization**<br>Train models using RGB histopathological images to retain critical color-based features like nuclear chromasia, eosinophilic cytoplasm, and staining gradients. |
+| **Lack of Model Interpretability** | **Explainable AI Integration**<br>Incorporate Grad-CAM and Grad-CAM++ to highlight discriminative regions, improving transparency and clinical trust in model decisions. |
 
 ### Proposed Solution: Code-Based Implementation
-This repository provides an implementation of the enhanced stable diffusion model using PyTorch. The solution includes:
+Each of the above ideas has been implemented and evaluated through modular configurations in the Moonlight framework. Key implementation details include:
 
-- **Modified UNet Architecture:** Incorporates residual connections and efficient convolutional blocks.
-- **Novel Loss Functions:** Combines Mean Squared Error (MSE) with perceptual loss to enhance feature learning.
-- **Optimized Training Loop:** Reduces computational overhead while maintaining performance.
+- **Architectures Used:**  
+  A diverse set of models were evaluated, including:
+  - `DenseNet121` (pretrained on ImageNet)
+  - `ResidualModel` (custom ResNet-like with skip connections)
+  - `EfficientConvModel` (using depthwise separable convolutions)
+  - `UNetClassifier` (U-Net encoder-style downsampling with residual blocks)
+  - `SimpleCNN` (lightweight 3-layer convolutional network)
+
+- **Loss Functions Supported:**  
+  - `cross_entropy`: standard log loss
+  - `focal`: with tunable γ and α for hard example mining
+  - `perceptual`: using softmax-to-onehot MSE
+  - `composite`: α·CrossEntropy + β·Perceptual (hybrid)
+
+- **Image Input Mode:**  
+  - Images are processed in **RGB mode** (not grayscale), retaining color histopathology features essential for diagnosis.
+
+- **Augmentation Strategies:**
+  - 🔹 **Basic Augmentation**:
+    - `Resize(224×224)`: standardizes input dimensions
+    - `Normalize(mean=0.5, std=0.5)`: applied to each RGB channel
+    - Applied to all training images with no variability
+
+  - 🔸 **Advanced Augmentation** *(used to simulate histological slide variation)*:
+    - `RandomResizedCrop(224)`: simulates zoom/scaling variability
+    - `RandomHorizontalFlip(p=0.5)`: mirrors tissue orientation
+    - `RandomRotation(degrees=15)`: reflects natural slide rotation
+    - `ColorJitter`: modifies brightness, contrast, and saturation to emulate staining variations
+
+- **Training Setup:**
+  - Epochs: 15  
+  - Optimizer: Adam with AMSGrad  
+  - Scheduler: StepLR (γ=0.1 every 20 epochs)  
+  - Early stopping: patience of 10 epochs  
+  - Batch Size: 32  
+  - Stratified validation split: 10%  
+  - Test split: 15% (held-out)
+
+- **Interpretability & XAI:**
+  - Manual implementations of `Grad-CAM` and `Grad-CAM++`  
+  - Heatmaps generated for both benign and malignant predictions  
+  - Visual overlays highlight discriminative tissue regions based on model attention
+
+These innovations collectively aim to improve prediction accuracy, interpretability, and trust in deep learning-based breast cancer diagnosis tools.
 
 ### Key Components
 - **`model.py`**: Contains the modified UNet architecture and other model components.
