@@ -184,7 +184,7 @@ All components below are organized into reusable Python modules. Files marked wi
 
 | File | Type | Description |
 |------|------|-------------|
-| `loss_functions.py` | New | Custom loss implementations:<br>- `FocalLoss`: addresses class imbalance<br>- `PerceptualLoss`: semantic alignment using softmax MSE<br>- `CompositeLoss`: hybrid of CrossEntropy + Perceptual<br>- Dispatcher via `get_loss_function(name)` |
+| `loss_functions.py` | New | Custom loss implementations:<br>- `FocalLoss`: addresses class imbalance<br>- `CompositeLoss`: hybrid of CrossEntropy + Perceptual<br>- Dispatcher via `get_loss_function(name)` |
 
 ---
 
@@ -229,7 +229,7 @@ All components below are organized into reusable Python modules. Files marked wi
 | Component Area | Enhancement Summary |
 |----------------|---------------------|
 | **Model** | Added residual, efficient, and U-Net classifiers with plug-and-play architecture loader |
-| **Loss** | Introduced Focal, Perceptual, and Composite loss with modular config |
+| **Loss** | Introduced Focal, and Composite loss with modular config |
 | **Data** | Advanced augmentation option to simulate clinical variability |
 | **Training** | Configurable via CLI, supports AMP, early stopping, learning rate scheduling |
 | **Testing** | Extended to compute and display full performance metrics |
