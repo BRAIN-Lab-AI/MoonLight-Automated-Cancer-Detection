@@ -298,13 +298,12 @@ Run the inference which will use Grad-CAM and Grad-CAM++ to visualizes predictio
 python inference_visualize_cam_interactive.py -i PathToImage/SampleImage.png -c saved/models/Trained_Models/0413_121022/config.json -r saved/models/Trained_Models/0413_121022/model_best.pth
 ```
 
-This will generate output images with:
+This will generate output images "same as images below" with:
 - Original image
 - Grad-CAM heatmap
 - Grad-CAM++ heatmap
 - Prediction label and confidence displayed at the top
 
-The results should look like this:
 ![Infrance done on benign sample](images/exp10_cam_benign.png)
 ![Infrance done on malignant sample](images/exp10_cam_malignant.png)
 
