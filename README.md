@@ -184,7 +184,7 @@ All components below are organized into reusable Python modules. Files marked wi
 
 | File | Type | Description |
 |------|------|-------------|
-| `loss_functions.py` | New | Custom loss implementations:<br>- `FocalLoss`: addresses class imbalance<br>- `CompositeLoss`: hybrid of CrossEntropy + Perceptual<br>- Dispatcher via `get_loss_function(name)` |
+| `loss_functions.py` | New | Custom loss implementations:<br>- `cross_entropy`: standard PyTorch `nn.CrossEntropyLoss()`<br>- `FocalLoss`: A dynamically scaled version of Cross Entropy Loss<br>- `CompositeLoss`: hybrid of CrossEntropy + Perceptual<br>- Dispatcher via `get_loss_function(name)` |
 
 ---
 
