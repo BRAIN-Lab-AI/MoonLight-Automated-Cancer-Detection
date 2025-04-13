@@ -111,12 +111,12 @@ Each of the above ideas has been implemented and evaluated through modular confi
   - Images are processed in **RGB mode** (not grayscale), retaining color histopathology features essential for diagnosis.
 
 - **Augmentation Strategies:**
-  - 🔹 **Basic Augmentation**:
+  - **Basic Augmentation**:
     - `Resize(224×224)`: standardizes input dimensions
     - `Normalize(mean=0.5, std=0.5)`: applied to each RGB channel
     - Applied to all training images with no variability
 
-  - 🔸 **Advanced Augmentation** *(used to simulate histological slide variation)*:
+  - **Advanced Augmentation** *(used to simulate histological slide variation)*:
     - `RandomResizedCrop(224)`: simulates zoom/scaling variability
     - `RandomHorizontalFlip(p=0.5)`: mirrors tissue orientation
     - `RandomRotation(degrees=15)`: reflects natural slide rotation
@@ -134,6 +134,30 @@ Each of the above ideas has been implemented and evaluated through modular confi
   - Manual implementations of `Grad-CAM` and `Grad-CAM++`  
   - Heatmaps generated for both benign and malignant predictions  
   - Visual overlays highlight discriminative tissue regions based on model attention
+ 
+- **Modular Configuration & CLI Customization:**
+  The Moonlight framework is fully modular and designed for reproducibility and flexibility. All training and testing parameters can be controlled via:
+  - A central `config.json` file
+  - Or overridden dynamically through the command line using flags
+
+  #### 📦 Configurable Components
+
+  | Component        | CLI Flag              | Available Options                                  |
+  |------------------|------------------------|----------------------------------------------------|
+  | Model Architecture | `--model_arch`       | `densenet121`, `residual`, `efficient`, `unet`, `simplecnn` |
+  | Loss Function      | `--loss_fn`          | `cross_entropy`, `focal`, `perceptual`, `composite` |
+  | Augmentation       | `--augment`          | `basic`, `advanced`                                |
+  | Batch Size         | `--bs`               | e.g., `16`, `32`, `64`                             |
+  | Learning Rate      | `--lr`               | e.g., `0.001`, `0.0001`                            |
+
+  #### 🧪 Example: Run a custom training experiment
+  ```bash
+  python train.py -c config.json \
+    --model_arch unet \
+    --loss_fn composite \
+    --augment advanced \
+    --bs 32 \
+    --lr 0.0005
 
 These innovations collectively aim to improve prediction accuracy, interpretability, and trust in deep learning-based breast cancer diagnosis tools.
 
