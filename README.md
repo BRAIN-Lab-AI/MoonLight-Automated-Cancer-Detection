@@ -10,7 +10,7 @@ Moonlight aims to support AI-assisted diagnostics with clinically relevant outco
 
 ### Authors
 - **Author:** Hassan Jawad Al-Dahneen  
-- **Supervisor:** Dr. Muzammil Behzad  
+- **Mentor:** Dr. Muzammil Behzad  
 - **Affiliation:** King Fahd University of Petroleum and Minerals (KFUPM)
 
 ### Project Documents
