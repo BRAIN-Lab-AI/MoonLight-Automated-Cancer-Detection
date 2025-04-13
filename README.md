@@ -223,57 +223,92 @@ All components below are organized into reusable Python modules. Files marked wi
 
 ## Model Workflow
 
-The Moonlight framework follows a modular, multi-step workflow to classify histopathological breast tissue images as benign or malignant, while maintaining explainability through visual attention maps.
+The Moonlight framework follows a modular, end-to-end workflow for classifying histopathological images into benign or malignant classes. The pipeline is designed for reproducibility, modular experimentation, and clinical interpretability.
 
 ### 1. **Input**
 
-- **Histopathology Slide:** The model takes a microscopic RGB image (e.g., 400X magnification) as input. These images are typically H&E-stained biopsies.
-- **Color Preservation:** Unlike traditional grayscale pipelines, Moonlight processes the image in full RGB to preserve diagnostic color cues like nuclear chromasia and cytoplasmic texture.
-- **Resize and Normalize:** All input images are resized to 224×224 pixels and normalized using ImageNet mean and standard deviation for each channel.
+- **Histopathology Image:** The model receives an RGB H&E-stained microscopic image (typically 400X magnification).
+- **Color Preservation:** RGB format is retained to preserve diagnostic features such as nuclear staining, glandular structure, and cytoplasmic texture.
+- **Resize and Normalize:** All input images are resized to 224×224 pixels and normalized using ImageNet statistics.
+
+---
 
 ### 2. **Preprocessing and Augmentation**
 
-- **Basic Augmentation:** Includes deterministic resize and normalization.
-- **Advanced Augmentation:** Introduces clinical variability using:
-  - `RandomResizedCrop(224)`
-  - `RandomHorizontalFlip(p=0.5)`
-  - `RandomRotation(degrees=15)`
+- **Basic Augmentation:**  
+  - Resize  
+  - Normalize  
+
+- **Advanced Augmentation (configurable via `--augment`):**  
+  - `RandomResizedCrop(224)`  
+  - `RandomHorizontalFlip(p=0.5)`  
+  - `RandomRotation(degrees=15)`  
   - `ColorJitter(brightness, contrast, saturation)`
-- Augmentation type is selectable via `--augment` CLI flag.
+
+---
 
 ### 3. **Model Selection and Training**
 
-- **Architecture:** A configurable model is selected (`--model_arch`) from options like `densenet121`, `residual`, `unet`, `efficient`, or `simplecnn`.
-- **Loss Function:** The training loss is chosen (`--loss_fn`) from:
+- **Selectable Architectures (`--model_arch`):**
+  - `densenet121`, `residual`, `unet`, `efficient`, `simplecnn`
+
+- **Configurable Loss Functions (`--loss_fn`):**
   - `cross_entropy`
-  - `focal` (focuses on hard examples)
-  - `perceptual` (softmax + MSE)
-  - `composite` (hybrid of CE + Perceptual)
-- **Training Pipeline:**
-  - Optimizer: Adam with AMSGrad
-  - Learning Rate Scheduler: StepLR
-  - Early Stopping: Stops if validation loss does not improve
+  - `focal`
+  - `perceptual`
+  - `composite` (CE + Perceptual hybrid)
 
-### 4. **Prediction and Evaluation**
+- **Training Configuration:**
+  - Optimizer: `Adam` with `AMSGrad`
+  - Scheduler: `StepLR`
+  - Early stopping enabled
+  - Batch size, learning rate, and augmentations configurable via CLI
 
-- During testing, the model predicts one of two classes: `benign` or `malignant`.
-- Outputs include:
-  - Predicted class label
-  - Class probabilities (from softmax)
-  - Performance metrics: accuracy, precision, recall, F1-score
+- **Output of Training:**
+  - Models are saved at each epoch (`checkpoint-epochX.pth`)
+  - The best model (based on validation loss) is saved as:
+    ```
+    model_best.pth
+    ```
 
-### 5. **Visual Explanation (Grad-CAM++)**
+---
 
-- Grad-CAM and Grad-CAM++ are applied to representative images to generate heatmaps showing the most discriminative regions.
-- These overlays highlight:
-  - Nuclei clusters
-  - Glandular patterns
-  - Morphological changes associated with malignancy
-- Outputs are saved as annotated image panels with:
-  - Original image
-  - Grad-CAM heatmap
-  - Grad-CAM++ heatmap
-  - Predicted label and confidence
+### 4. **Testing and Evaluation**
+
+- After training, the `model_best.pth` checkpoint is evaluated using:
+  ```bash
+  python test.py -c config.json -r path/to/model_best.pth
+  ```
+
+- **Generated Metrics:**
+  - **Accuracy:** Overall correctness of predictions
+  - **Precision:** TP / (TP + FP) — relevance of positive predictions
+  - **Recall:** TP / (TP + FN) — ability to identify all positives
+  - **F1-Score:** Harmonic mean of precision and recall
+  - All results are printed and logged per experiment
+
+---
+
+### 5. **Grad-CAM++ Visual Explanation**
+
+- **Grad-CAM & Grad-CAM++** are applied to two selected test images (benign and malignant).
+- Visualizations include:
+  - Original input image
+  - Grad-CAM overlay
+  - Grad-CAM++ overlay
+  - Predicted label with softmax confidence
+
+- **Outputs:**
+  - Saved as annotated `.png` files within the experiment folder:
+    ```
+    cam_benign.png
+    cam_malignant.png
+    ```
+
+---
+
+This workflow enables training, saving, evaluation, and interpretation of deep learning models tailored for histopathological breast cancer diagnosis using the BreaKHis dataset.
+
 
 ## How to Run the Code
 
