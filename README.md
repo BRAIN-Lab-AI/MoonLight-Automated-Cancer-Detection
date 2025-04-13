@@ -105,7 +105,6 @@ Each of the above ideas has been implemented and evaluated through modular confi
 - **Loss Functions Supported:**  
   - `cross_entropy`: standard log loss
   - `focal`: with tunable γ and α for hard example mining
-  - `perceptual`: using softmax-to-onehot MSE
   - `composite`: α·CrossEntropy + β·Perceptual (hybrid)
 
 - **Image Input Mode:**  
