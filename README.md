@@ -125,8 +125,7 @@ Each of the above ideas has been implemented and evaluated through modular confi
 - **Training Setup:**
   - Epochs: 15  
   - Optimizer: Adam with AMSGrad  
-  - Scheduler: StepLR (γ=0.1 every 20 epochs)  
-  - Early stopping: patience of 10 epochs  
+  - Scheduler: StepLR (γ=0.1)
   - Batch Size: 32  
   - Stratified validation split: 10%  
   - Test split: 15% (held-out)
