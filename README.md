@@ -196,7 +196,7 @@ All components below are organized into reusable Python modules. Files marked wi
 
 | File | Type | Description |
 |------|------|-------------|
-| `inference_visualize_cam_interactive.py` | New | Do inference and use Grad-CAM and Grad-CAM++ to visualizes predictions for an input (benign or malignant) sample with heatmap overlays and confidence bars |
+| `inference_visualize_cam_interactive.py` | New | Do inference plus use Grad-CAM and Grad-CAM++ to visualizes predictions for an input (benign or malignant) sample with heatmap overlays and confidence bars |
 
 **Utilities**
 
