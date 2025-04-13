@@ -280,7 +280,17 @@ To evaluate a trained model using the best saved checkpoint, update the subfolde
 python -u test.py -c saved/models/Trained_Models/PathTo/config.json -r saved/models/Trained_Models/`PathTo`/model_best.pth
 ```
 
-**Step 6: Generate Grad-CAM++ Visualizations**
+The results should look like this
+```bash
+===== Test Results =====
+Test Loss       : 0.1420
+Test Accuracy   : 94.49%
+Precision       : 0.9468
+Recall          : 0.9449
+F1 Score        : 0.9454
+========================
+```
+**Step 6: Inference & Generate Grad-CAM++ Visualizations**
 
 Run Grad-CAM and Grad-CAM++ on one benign and one malignant image:
 
