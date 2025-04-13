@@ -156,7 +156,6 @@ Each of the above ideas has been implemented and evaluated through modular confi
 
 These innovations collectively aim to improve prediction accuracy, interpretability, and trust in deep learning-based breast cancer diagnosis tools. In addation, this approach supports reproducible experimentation across architectures, losses, and preprocessing strategies without modifying any core code.
 
-### Key Components
 ## Key Components
 
 The Moonlight framework builds on top of the original BreaKHis deep learning pipeline by introducing several **enhanced** and **new** modules that improve flexibility, performance, and explainability.
