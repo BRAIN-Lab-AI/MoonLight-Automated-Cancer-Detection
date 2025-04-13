@@ -259,7 +259,7 @@ pip install -r requirements.txt
 unzip breakhis.zip -d ./data/
 ```
 
-After extraction, your directory structure should look like: 'data/BreaKHis_v1/BreaKHis_v1/histology_slides/breast/'
+After extraction, your directory structure should look like: `data/BreaKHis_v1/BreaKHis_v1/histology_slides/breast/`
 
 **Step 4: Train a Model**
 
