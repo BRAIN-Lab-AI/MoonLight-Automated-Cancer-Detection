@@ -280,7 +280,7 @@ To evaluate a trained model using the best saved checkpoint, update the subfolde
 python -u test.py -c saved/models/Trained_Models/PathTo/config.json -r saved/models/Trained_Models/`PathTo`/model_best.pth
 ```
 
-The results should look like this
+The results should look like this:
 ```bash
 ===== Test Results =====
 Test Loss       : 0.1420
@@ -292,11 +292,10 @@ F1 Score        : 0.9454
 ```
 **Step 6: Inference & Generate Grad-CAM++ Visualizations**
 
-Run Grad-CAM and Grad-CAM++ on one benign and one malignant image:
+Run the inference which will use Grad-CAM and Grad-CAM++ to visualizes predictions for a sample benign or malignant image. Update the subfolders name `PathTo` below to point to the right trained model then run and `PathToImage` to point to the right smaple image.
 
 ```bash
-python generate_gradcam_pp.py -c config.json \
-  -r saved/models/BCUnet/exp10/model_best.pth
+python inference_visualize_cam_interactive.py -i PathToImage/SampleImage.png -c saved/models/Trained_Models/0413_121022/config.json -r saved/models/Trained_Models/0413_121022/model_best.pth
 ```
 
 This will generate output images with:
