@@ -295,7 +295,7 @@ F1 Score        : 0.9454
 Run the inference which will use Grad-CAM and Grad-CAM++ to visualizes predictions for a sample (benign or malignant) image. Update subfolders named `PathTo` to point to the right trained model, and update subfolders named `PathToImage` to point to the right smaple image.
 
 ```bash
-python inference_visualize_cam_interactive.py -i PathToImage/SampleImage.png -c saved/models/Trained_Models/0413_121022/config.json -r saved/models/Trained_Models/0413_121022/model_best.pth
+python inference_visualize_cam_interactive.py -i PathToImage/SampleImage.png -c saved/models/Trained_Models/PathTo/config.json -r saved/models/Trained_Models/PathTo/model_best.pth
 ```
 
 This will generate output images "same as images below" with:
