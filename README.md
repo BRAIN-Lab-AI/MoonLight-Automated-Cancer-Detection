@@ -233,7 +233,7 @@ Follow these steps to set up, train, evaluate, and visualize breast cancer detec
 
 ```bash
 git clone https://github.com/BRAIN-Lab-AI/MoonLight-Automated-Cancer-Detection.git
-cd moonlight-breast-cancer-detection
+cd MoonLight-Automated-Cancer-Detection
 ```
 
 **Step 2: Set Up the Environment (Dependencies)**
