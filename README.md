@@ -274,7 +274,7 @@ python train.py -c config.json --model_arch unet_classifier --loss_fn composite 
 
 **Step 5: Test a Trained Model**
 
-To evaluate a trained model using the best saved checkpoint, update the subfolder name `PathTo` in python -u test.py -c saved/models/Trained_Models/`PathTo`/config.json -r saved/models/Trained_Models/`PathTo`/model_best.pth to point to the right trained model then run .
+To evaluate a trained model using the best saved checkpoint, update the subfolder name `PathTo` below to point to the right trained model then run.
 
 ```bash
 python -u test.py -c saved/models/Trained_Models/PathTo/config.json -r saved/models/Trained_Models/`PathTo`/model_best.pth
