@@ -303,8 +303,7 @@ This will generate output images "same as images below" with:
 - Grad-CAM heatmap
 - Grad-CAM++ heatmap
 - Prediction label and confidence displayed at the top
-
-![Infrance done on benign sample](images/exp10_cam_benign.png)
+- 
 ![Infrance done on malignant sample](images/exp10_cam_malignant.png)
 
 **Optional: Customize Experiments via CLI**
