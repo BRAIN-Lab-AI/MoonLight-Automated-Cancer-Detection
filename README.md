@@ -221,22 +221,59 @@ All components below are organized into reusable Python modules. Files marked wi
 | **Interpretability** | Manual Grad-CAM++ and Grad-CAM implemented for XAI support |
 | **Config** | Reproducible experiment design using structured JSON + CLI control |
 
-
 ## Model Workflow
-The workflow of the Enhanced Stable Diffusion model is designed to translate textual descriptions into high-quality artistic images through a multi-step diffusion process:
 
-1. **Input:**
-   - **Text Prompt:** The model takes a text prompt (e.g., "A surreal landscape with mountains and rivers") as the primary input.
-   - **Tokenization:** The text prompt is tokenized and processed through a text encoder (such as a CLIP model) to obtain meaningful embeddings.
-   - **Latent Noise:** A random latent noise vector is generated to initialize the diffusion process, which is then conditioned on the text embeddings.
+The Moonlight framework follows a modular, multi-step workflow to classify histopathological breast tissue images as benign or malignant, while maintaining explainability through visual attention maps.
 
-2. **Diffusion Process:**
-   - **Iterative Refinement:** The conditioned latent vector is fed into a modified UNet architecture. The model iteratively refines this vector by reversing a diffusion process, gradually reducing noise while preserving the text-conditioned features.
-   - **Intermediate States:** At each step, intermediate latent representations are produced that increasingly capture the structure and details dictated by the text prompt.
+### 1. **Input**
 
-3. **Output:**
-   - **Decoding:** The final refined latent representation is passed through a decoder (often part of a Variational Autoencoder setup) to generate the final image.
-   - **Generated Image:** The output is a synthesized image that visually represents the input text prompt, complete with artistic style and detail.
+- **Histopathology Slide:** The model takes a microscopic RGB image (e.g., 400X magnification) as input. These images are typically H&E-stained biopsies.
+- **Color Preservation:** Unlike traditional grayscale pipelines, Moonlight processes the image in full RGB to preserve diagnostic color cues like nuclear chromasia and cytoplasmic texture.
+- **Resize and Normalize:** All input images are resized to 224×224 pixels and normalized using ImageNet mean and standard deviation for each channel.
+
+### 2. **Preprocessing and Augmentation**
+
+- **Basic Augmentation:** Includes deterministic resize and normalization.
+- **Advanced Augmentation:** Introduces clinical variability using:
+  - `RandomResizedCrop(224)`
+  - `RandomHorizontalFlip(p=0.5)`
+  - `RandomRotation(degrees=15)`
+  - `ColorJitter(brightness, contrast, saturation)`
+- Augmentation type is selectable via `--augment` CLI flag.
+
+### 3. **Model Selection and Training**
+
+- **Architecture:** A configurable model is selected (`--model_arch`) from options like `densenet121`, `residual`, `unet`, `efficient`, or `simplecnn`.
+- **Loss Function:** The training loss is chosen (`--loss_fn`) from:
+  - `cross_entropy`
+  - `focal` (focuses on hard examples)
+  - `perceptual` (softmax + MSE)
+  - `composite` (hybrid of CE + Perceptual)
+- **Training Pipeline:**
+  - Optimizer: Adam with AMSGrad
+  - Learning Rate Scheduler: StepLR
+  - Early Stopping: Stops if validation loss does not improve
+
+### 4. **Prediction and Evaluation**
+
+- During testing, the model predicts one of two classes: `benign` or `malignant`.
+- Outputs include:
+  - Predicted class label
+  - Class probabilities (from softmax)
+  - Performance metrics: accuracy, precision, recall, F1-score
+
+### 5. **Visual Explanation (Grad-CAM++)**
+
+- Grad-CAM and Grad-CAM++ are applied to representative images to generate heatmaps showing the most discriminative regions.
+- These overlays highlight:
+  - Nuclei clusters
+  - Glandular patterns
+  - Morphological changes associated with malignancy
+- Outputs are saved as annotated image panels with:
+  - Original image
+  - Grad-CAM heatmap
+  - Grad-CAM++ heatmap
+  - Predicted label and confidence
 
 ## How to Run the Code
 
@@ -291,8 +328,6 @@ python train.py -c config.json \
   --lr 0.0005
 ```
 
----
-
 **Step 5: Test a Trained Model**
 
 To evaluate a trained model using the best saved checkpoint:
@@ -301,8 +336,6 @@ To evaluate a trained model using the best saved checkpoint:
 python test.py -c config.json \
   -r saved/models/BCUnet/exp10/model_best.pth
 ```
-
----
 
 **Step 6: Generate Grad-CAM++ Visualizations**
 
@@ -320,8 +353,6 @@ This will generate output images with:
 - Prediction label and confidence displayed at the top
 
 Output files will be saved to the same experiment directory.
-
----
 
 **Optional: Customize Experiments via CLI**
 
