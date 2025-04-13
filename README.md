@@ -225,7 +225,7 @@ The Moonlight framework processes histopathology images through a structured pip
 3. **Testing and Evaluation**: After training, the saved model is tested on previously unseen images. The system generates a full performance report that includes accuracy, precision, recall, and F1-score. These metrics help assess how reliable and effective the model is at detecting cancer.
 4. **Visual Explanation**: To make the model’s decisions understandable, a visual explanation technique called Grad-CAM++ is used. It highlights the areas in the tissue image that the model focused on when making its prediction. This helps build trust and offers insights for clinical review.
 
-## How to Run the Code
+### How to Run the Code
 
 Follow these steps to set up, train, evaluate, and visualize breast cancer detection models using the Moonlight framework.
 
