@@ -267,10 +267,11 @@ data/BreaKHis_v1/BreaKHis_v1/histology_slides/breast/
 
 **Step 4: Train a Model**
 
-Use the default configuration file or override parameters from the command line. Run the below to get the best performing model out of the 15 which we tried:
+Use the default configuration file or override parameters from the command line. Run the below to get the 2 best performing model out of the 15 which we tried:
 
 ```bash
 python train.py -c config.json --model_arch unet_classifier --loss_fn cross_entropy --augment basic
+python train.py -c config.json --model_arch unet_classifier --loss_fn composite --augment basic
 ```
 
 **Step 5: Test a Trained Model**
@@ -278,8 +279,9 @@ python train.py -c config.json --model_arch unet_classifier --loss_fn cross_entr
 To evaluate a trained model using the best saved checkpoint:
 
 ```bash
-python test.py -c config.json \
-  -r saved/models/BCUnet/exp10/model_best.pth
+python test.py -c path/to/config.json \
+  -r saved/models/Trained Models/path_to/model_best.pth
+python -u test.py -c saved/models/path_to/config.json -r saved/models/path_to/model_best.pth
 ```
 
 **Step 6: Generate Grad-CAM++ Visualizations**
