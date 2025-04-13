@@ -145,19 +145,14 @@ Each of the above ideas has been implemented and evaluated through modular confi
   | Component        | CLI Flag              | Available Options                                  |
   |------------------|------------------------|----------------------------------------------------|
   | Model Architecture | `--model_arch`       | `densenet121`, `residual`, `efficient`, `unet`, `simplecnn` |
-  | Loss Function      | `--loss_fn`          | `cross_entropy`, `focal`, `perceptual`, `composite` |
+  | Loss Function      | `--loss_fn`          | `cross_entropy`, `focal`, `composite`               |
   | Augmentation       | `--augment`          | `basic`, `advanced`                                |
   | Batch Size         | `--bs`               | e.g., `16`, `32`, `64`                             |
   | Learning Rate      | `--lr`               | e.g., `0.001`, `0.0001`                            |
 
   #### 🧪 Example: Run a custom training experiment
   ```bash
-  python train.py -c config.json \
-    --model_arch unet \
-    --loss_fn composite \
-    --augment advanced \
-    --bs 32 \
-    --lr 0.0005
+  python train.py -c config.json --model_arch unet --loss_fn composite --augment advanced  --bs 32 --lr 0.0005
 
 These innovations collectively aim to improve prediction accuracy, interpretability, and trust in deep learning-based breast cancer diagnosis tools.
 
