@@ -270,10 +270,10 @@ Run the below to get the best performing model out of the 15 we tried.
 ```bash
 python train.py -c config.json --model_arch unet_classifier --loss_fn composite --augment basic
 ```
-*Note*
+- **Note**
 you can download and utlize any of [Trained Models](https://kfupmedusa-my.sharepoint.com/:f:/g/personal/g200459300_kfupm_edu_sa/Ev38OR9hKBxBiAkIw4Ex2SABhessubCaccGBKy4uRY7b6Q?e=wiW2qt) which we tranied already using using different training configurations.
 
-*Optional: Customize Experiments via CLI*
+- **Optional: Customize Experiments via CLI**
 
 Moonlight supports CLI overrides for flexible experimentation:
 
@@ -284,8 +284,6 @@ Moonlight supports CLI overrides for flexible experimentation:
 | Augmentation       | `--augment advanced`      |
 | Batch Size         | `--bs 64`                 |
 | Learning Rate      | `--lr 0.0001`             |
-
-You can also automate multiple runs using `.sh` or `.bat` scripts.
 
 **Step 5: Test a Trained Model**
 
