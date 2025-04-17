@@ -270,12 +270,9 @@ Run the below to get the best performing model out of the 15 we tried.
 ```bash
 python train.py -c config.json --model_arch unet_classifier --loss_fn composite --augment basic
 ```
-- **Note**
-you can download and utlize any of [Trained Models](https://kfupmedusa-my.sharepoint.com/:f:/g/personal/g200459300_kfupm_edu_sa/Ev38OR9hKBxBiAkIw4Ex2SABhessubCaccGBKy4uRY7b6Q?e=wiW2qt) which we tranied already using using different training configurations.
+- **Note:** you can download and utlize any of [Trained Models](https://kfupmedusa-my.sharepoint.com/:f:/g/personal/g200459300_kfupm_edu_sa/Ev38OR9hKBxBiAkIw4Ex2SABhessubCaccGBKy4uRY7b6Q?e=wiW2qt) which we tranied already using using different training configurations.
 
-- **Optional: Customize Experiments via CLI**
-
-Moonlight supports CLI overrides for flexible experimentation:
+- **Optional:** Customize Experiments via CLI, Moonlight supports CLI overrides for flexible experimentation:
 
 | Parameter         | Example Usage              |
 |------------------|----------------------------|
@@ -290,7 +287,7 @@ Moonlight supports CLI overrides for flexible experimentation:
 To evaluate a trained model using the best saved checkpoint, update subfolder named `PathTo` below to point to the right trained model then run it.
 
 ```bash
-python -u test.py -c "PathTo/config.json" -r "PathTo/model_best.pth"
+python -u test.py -c "PathTo\config.json" -r "PathTo\model_best.pth"
 ```
 
 The results should look like this:
@@ -308,7 +305,7 @@ F1 Score        : 0.9454
 Run the inference which will use Grad-CAM and Grad-CAM++ to visualizes predictions for a sample (benign or malignant) image. Update subfolders named `PathTo` to point to the right trained model, and update subfolders named `PathToImage` to point to the right smaple image.
 
 ```bash
-python inference_visualize_cam_interactive.py -i PathToImage/SampleImage.png -c saved/models/Trained_Models/PathTo/config.json -r saved/models/Trained_Models/PathTo/model_best.pth
+python inference_visualize_cam_interactive.py -i "PathToImage\SampleImage.png" -c "PathTo\config.json" -r "PathTo\model_best.pth"
 ```
 
 This will generate output images "same as images below" with:
