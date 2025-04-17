@@ -265,21 +265,19 @@ After extraction, your directory structure should look like: `data/BreaKHis_v1/B
 
 **Step 4: Train a Model**
 
-Run the below to get the 2 best performing models out of the 16 we tried.
+Run the below to get the best performing model out of the 15 we tried.
 
-```bash
-python train.py -c config.json --model_arch unet_classifier --loss_fn cross_entropy --augment basic
-```
 ```bash
 python train.py -c config.json --model_arch unet_classifier --loss_fn composite --augment basic
 ```
+Note: you can download and utlize any of [Trained Models](https://kfupmedusa-my.sharepoint.com/:f:/g/personal/g200459300_kfupm_edu_sa/Ev38OR9hKBxBiAkIw4Ex2SABhessubCaccGBKy4uRY7b6Q?e=wiW2qt) which we tranied already using using different training configurations.
 
 **Step 5: Test a Trained Model**
 
 To evaluate a trained model using the best saved checkpoint, update subfolder named `PathTo` below to point to the right trained model then run.
 
 ```bash
-python -u test.py -c saved/models/Trained_Models/PathTo/config.json -r saved/models/Trained_Models/`PathTo`/model_best.pth
+python -u test.py -c "PathTo/config.json" -r "PathTo/model_best.pth"
 ```
 
 The results should look like this:
