@@ -274,7 +274,7 @@ Note: you can download and utlize any of [Trained Models](https://kfupmedusa-my.
 
 **Step 5: Test a Trained Model**
 
-To evaluate a trained model using the best saved checkpoint, update subfolder named `PathTo` below to point to the right trained model then run.
+To evaluate a trained model using the best saved checkpoint, update subfolder named `PathTo` below to point to the right trained model then run it.
 
 ```bash
 python -u test.py -c "PathTo/config.json" -r "PathTo/model_best.pth"
