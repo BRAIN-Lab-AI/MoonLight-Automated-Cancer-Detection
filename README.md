@@ -28,6 +28,7 @@ Moonlight aims to support AI-assisted diagnostics with clinically relevant outco
 
 ### Trained Models
 - [Trained Models](https://kfupmedusa-my.sharepoint.com/:f:/g/personal/g200459300_kfupm_edu_sa/Ev38OR9hKBxBiAkIw4Ex2SABhessubCaccGBKy4uRY7b6Q?e=wiW2qt)
+- [Test Results & performance of All Trained Models](Results.png)
 
 ## Project Technicalities
 
