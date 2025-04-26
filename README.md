@@ -14,7 +14,7 @@ Moonlight aims to support AI-assisted diagnostics with clinically relevant outco
 - **Affiliation:** King Fahd University of Petroleum and Minerals (KFUPM)
 
 ### Project Documents
-- **Presentation:** [Project Presentation](/presentation.pptx)
+- **Presentation:** [Project Presentation](Moonlight-Enhanced-Deep-Learning-for-Breast-Cancer-Detection.pptx)
 - **Report:** [Moonlight Project Report](Moonlight__Enhanced_Deep_Learning_Models_for_Breast_Cancer_Detection_Using_Histopathology_Image.pdf)
 
 ### Reference Paper
